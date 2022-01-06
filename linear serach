@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+struct slist
+{
+    int data;
+    struct slist*next;
+};
+typedef struct slist node;
+
+node*create(node*first)
+{
+    node*new,*prev;
+    int x;
+    printf("Enter the data(enter -1 to stop)=");
+    scanf("%d",&x);
+    while (x!=-1)
+    {
+        new = (node*)malloc(sizeof(node));
+        new->data = x;
+        new->next = NULL;
+       
+        if (first==NULL)
+        {
+            first = new;
+            prev = new;
+        }
+        else
+        {
+            prev->next = new;
+            prev = new;
+        }
+    printf("Enter the data(enter -1 to stop)=");
+    scanf("%d",&x);
+    }
+    return first;
+}
+   
+    void search(node*first,int x)
+    {
+        node*temp=first;
+        int flag=0;
+        while(temp!=NULL)
+        {
+            if(temp->data==x)
+            {
+                flag=1;
+                break;
+            }
+            else
+            {
+                temp=temp->next;
+            }
+        }
+        if(flag==1)
+        {
+            printf("the element %d is found",x);
+        }
+        else
+        {
+            printf("the element %d is not found",x);
+        }
+    }
+    void display(node*first)
+    {
+    node*temp = first;
+    if (first==NULL)
+    {
+        printf("no list to print");
+    }
+    else
+    {
+    while(temp!=NULL)
+    {
+        printf("|%d|->",temp->data);
+        temp = temp->next;
+    }
+    printf("NULL");
+    }
+    }
+    void main()
+    {
+        int x;
+        node*head=NULL;
+        head = create(head);
+        display(head);
+        printf("\n enter the value of x:");
+        scanf("%d",&x);
+        search(head,x);
+    }
+
